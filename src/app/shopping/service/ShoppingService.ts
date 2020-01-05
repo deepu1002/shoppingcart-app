@@ -6,8 +6,8 @@ import {Injectable} from '@angular/core';
 
 @Injectable()
 export class ShoppingService {
-    private productsUrl = '/products';
-    private cartUrl = '/cart';
+    private productsUrl = 'api/products/';
+    private cartUrl = 'api/cart';
 
     private cartProduct: CartProduct;
     private cart: CartProducts = new CartProducts();

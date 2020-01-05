@@ -12,12 +12,12 @@ import { ShoppingService } from '../service/ShoppingService';
 })
 export class ProductsComponent implements OnInit {
 
-  cartProducts: CartProduct[] = [];
+    cartProducts: CartProduct[] = [];
     products: Product[] = [];
     selectedCartProduct: CartProduct;
     private shoppingCartProducts: CartProducts;
     sub: Subscription;
-    productSelected: boolean = false;
+    productSelected = false;
 
     constructor(private shoppingService: ShoppingService) {}
 

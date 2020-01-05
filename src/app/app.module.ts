@@ -1,12 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ShoppingComponent } from './shopping/shopping.component';
 import { ProductsComponent } from './shopping/products/products.component';
 import { OrdersComponent } from './shopping/orders/orders.component';
 import { ShoppingCartComponent } from './shopping/shopping-cart/shopping-cart.component';
+import { ShoppingService } from './shopping/service/ShoppingService';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -18,9 +21,12 @@ import { ShoppingCartComponent } from './shopping/shopping-cart/shopping-cart.co
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [ShoppingService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

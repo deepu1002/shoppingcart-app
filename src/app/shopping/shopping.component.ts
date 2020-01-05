@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { ProductsComponent } from './products/products.component';
+import { OrdersComponent } from './orders/orders.component';
 
 @Component({
   selector: 'app-shopping',
@@ -39,5 +42,4 @@ export class ShoppingComponent implements OnInit {
         this.shoppingCartC.reset();
         this.ordersC.paid = false;
     }
-}
 }
