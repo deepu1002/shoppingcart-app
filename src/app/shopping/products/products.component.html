@@ -1,27 +1,34 @@
 <div class="row card-deck">
-  <div class="col-lg-4 col-md-6 mb-4" *ngFor="let order of cartProducts">
-      <div class="card text-center">
-          <div class="card-header">
-              <h4>{{order.product.name}}</h4>
-          </div>
-          <div class="card-body">
-              <h5 class="card-title">Rs.{{order.product.price}}</h5>
-              <div class="row">
-                  <div class="col-4 padding-0" *ngIf="!isProductSelected(order.product)">
-                      <input type="number" min="0" class="form-control" [(ngModel)]=order.quantity>
-                  </div>
-                  <div class="col-4 padding-0" *ngIf="!isProductSelected(order.product)">
-                      <button class="btn btn-primary" (click)="addToCart(order)"
-                              [disabled]="order.quantity <= 0">Add To Cart
-                      </button>
-                  </div>
-                  <div class="col-12" *ngIf="isProductSelected(order.product)">
-                      <button class="btn btn-primary btn-block"
-                              (click)="removeFromCart(order)">Remove From Cart
-                      </button>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
+<div class="col-12 col-md-6 col-lg-4" *ngFor="let order of cartProducts">
+    <div class="card">
+        <img class="card-img-top" src="https://dummyimage.com/600x400/55595c/fff" alt="Card image cap">
+        <div class="card-body">
+            <h4 class="card-title"><a href="product.html" title="View Product">{{order.product.name}}</a></h4>
+                <p *ngIf="order.product.genre" class="card-text" >Genre - {{order.product.genre}}</p>
+                <p *ngIf="order.product.author" class="card-text">Author - {{order.product.author}}</p>
+                <p *ngIf="order.product.publications" class="card-text">Publications - {{order.product.publications}}</p>
+                <p *ngIf="order.product.type" class="card-text" >Type - {{order.product.type}}</p>
+                <p *ngIf="order.product.brand" class="card-text">Brand - {{order.product.brand}}</p>
+                <p *ngIf="order.product.design" class="card-text">Design - {{order.product.design}}</p>
+            <div class="row">
+                <div class="col">
+                    <p class="btn btn-primary btn-block">Rs.{{order.product.price}}</p>
+                </div>
+                <div class="col-4 padding-0" *ngIf="!isProductSelected(order.product)">
+                    <input type="number" min="0" class="form-control" [(ngModel)]=order.quantity>
+                </div>
+                <div class="col" *ngIf="!isProductSelected(order.product)">
+                    <button class="btn btn-success btn-block" (click)="addToCart(order)"
+                            [disabled]="order.quantity <= 0">Add To Cart
+                    </button>
+                </div>
+                <div class="col"*ngIf="isProductSelected(order.product)">
+                    <button class="btn btn-primary btn-block"
+                            (click)="removeFromCart(order)">Remove From Cart
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </div>
