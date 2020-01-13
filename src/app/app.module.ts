@@ -10,6 +10,8 @@ import { OrdersComponent } from './shopping/orders/orders.component';
 import { ShoppingCartComponent } from './shopping/shopping-cart/shopping-cart.component';
 import { ShoppingService } from './shopping/service/ShoppingService';
 import { AppRoutingModule } from './app-routing.module';
+import { LoginComponent } from './shopping/login/login.component';
+import { LogoutComponent } from './shopping/logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { AppRoutingModule } from './app-routing.module';
     ShoppingComponent,
     ProductsComponent,
     OrdersComponent,
-    ShoppingCartComponent
+    ShoppingCartComponent,
+    LoginComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,

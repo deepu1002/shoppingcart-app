@@ -10,43 +10,43 @@ import { OrdersComponent } from './orders/orders.component';
   styleUrls: ['./shopping.component.css']
 })
 export class ShoppingComponent implements OnInit {
-  
-  private collapsed = true;
-    orderFinished = false;
 
-    @ViewChild('productsC')
-    productsC: ProductsComponent;
+  // private collapsed = true;
+  //   orderFinished = false;
 
-    @ViewChild('shoppingCartC')
-    shoppingCartC: ShoppingCartComponent;
+    // @ViewChild('productsC')
+    // productsC: ProductsComponent;
 
-    @ViewChild('ordersC')
-    ordersC: OrdersComponent;
+    // @ViewChild('shoppingCartC')
+    // shoppingCartC: ShoppingCartComponent;
+
+    // @ViewChild('ordersC')
+    // ordersC: OrdersComponent;
 
     ngOnInit() {
     }
 
     constructor() {}
-    //constructor( private router: Router ) {} 
+    //constructor( private router: Router ) {}
 
-    toggleCollapsed(): void {
-        this.collapsed = !this.collapsed;
-    }
+    // toggleCollapsed(): void {
+    //     this.collapsed = !this.collapsed;
+    // }
 
-    finishOrder(orderFinished: boolean) {
-        this.orderFinished = orderFinished;
-    }
+    // finishOrder(orderFinished: boolean) {
+    //     this.orderFinished = orderFinished;
+    // }
 
     reset() {
-        this.orderFinished = false;
-        this.productsC.reset();
-        this.shoppingCartC.reset();
-        this.ordersC.paid = false;
+        // this.orderFinished = false;
+        // this.productsC.reset();
+        // this.shoppingCartC.reset();
+        // this.ordersC.paid = false;
     }
 
-    // onCustomAction() { 
+    // onCustomAction() {
     //   this.router.navigate(['/cart'])
     //     .then(success => console.log('navigation success?' , success))
-    //     .catch(console.error); 
-    // } 
+    //     .catch(console.error);
+    // }
 }

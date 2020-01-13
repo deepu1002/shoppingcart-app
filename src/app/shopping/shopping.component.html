@@ -32,7 +32,7 @@
       <app-orders #ordersC [hidden]="!orderFinished"></app-orders>
   </div>
 </div> -->
-
+<!--
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -46,9 +46,9 @@
         </button>
 
         <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
-        
-            <form class="form-inline my-2 my-lg-0">
-                <div class="input-group input-group-sm">
+
+            <form class="form-inline my-2 my-lg-0"> -->
+                <!-- <div class="input-group input-group-sm">
                     <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search...">
                     <div class="input-group-append">
                         <button type="button" class="btn btn-secondary btn-number">
@@ -56,10 +56,11 @@
                         </button>
                     </div>
                 </div>
-                <!-- <button type="button" class="btn btn-success btn-sm ml-3" (click)="onCustomAction()>
-                    <i class="fa fa-shopping-cart"></i> Cart
-                    <span class="badge badge-light">3</span>
-                </button> -->
+                <a class="btn btn-success btn-sm ml-3" href="/cart">
+                  <i class="fa fa-shopping-cart"></i> Cart
+                  <span class="badge badge-light">3</span>
+              </a>
+              <a class="btn btn-dark btn-sm ml-3" href="/logout"> Logout</a>
             </form>
         </div>
     </div>
@@ -67,8 +68,8 @@
 <div>
 </div>
 <div class="container">
-    <div class="row">
-        <div class="col-12 col-sm-3">
+    <div class="row"> -->
+        <!-- <div class="col-12 col-sm-3">
             <div class="card bg-dark mb-3">
                 <div class="card-header bg-dark text-white text-uppercase"><i class="fa fa-list"></i> Categories</div>
                 <ul class="list-group category_block">
@@ -76,19 +77,19 @@
                     <li class="list-group-item"><a href="category.html">Apparels</a></li>
                 </ul>
             </div>
-        </div>
-        <div class="col">
+        </div> -->
+        <!-- <div class="col">
             <div class="row">
                 <app-products #productsC [hidden]="orderFinished"></app-products>
             </div>
         </div>
-        <!-- <div class="col-md-3">
+        <div class="col-md-3">
             <app-shopping-cart (onOrderFinished)=finishOrder($event) #shoppingCartC
                 [hidden]="orderFinished"></app-shopping-cart>
         </div>
         <div class="col-md-6 offset-3">
             <app-orders #ordersC [hidden]="!orderFinished"></app-orders>
         </div> -->
-</div>
+<!-- </div> -->
+<app-products></app-products>
 
- 

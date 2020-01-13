@@ -60,11 +60,25 @@ export class ProductsComponent implements OnInit {
                     this.products = products;
                     this.products.forEach(product => {
                         this.cartProducts.push(new CartProduct(product, 0));
-                    })
+                    });
                 },
                 (error) => console.log(error)
             );
     }
+
+    loadProductCategory(value: string) {
+      this.shoppingService.getAllProductCategory(value)
+          .subscribe(
+              (products: any[]) => {
+                  this.cartProducts = [];
+                  this.products = products;
+                  this.products.forEach(product => {
+                      this.cartProducts.push(new CartProduct(product, 0));
+                  });
+              },
+              (error) => console.log(error)
+          );
+  }
 
     loadOrders() {
         this.sub = this.shoppingService.OrdersChanged.subscribe(() => {

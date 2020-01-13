@@ -8,6 +8,7 @@ import {Injectable} from '@angular/core';
 export class ShoppingService {
     private productsUrl = 'api/products/';
     private cartUrl = 'api/cart';
+    private categoryUrl = 'api/products/category/';
 
     private cartProduct: CartProduct;
     private cart: CartProducts = new CartProducts();
@@ -28,6 +29,10 @@ export class ShoppingService {
     getAllProducts() {
         return this.http.get(this.productsUrl);
     }
+
+    getAllProductCategory(value: string) {
+      return this.http.get(this.categoryUrl + value);
+  }
 
     saveOrder(cart: CartProducts) {
         return this.http.post(this.cartUrl, cart);
