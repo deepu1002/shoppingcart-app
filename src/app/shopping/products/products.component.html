@@ -14,16 +14,16 @@
 
             <form class="form-inline my-2 my-lg-0">
                 <div class="input-group input-group-sm">
-                    <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search...">
+                    <input type="text" #search class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search by name...">
                     <div class="input-group-append">
-                        <button type="button" class="btn btn-secondary btn-number">
+                        <button type="button" class="btn btn-secondary btn-number" (click)="searchProducts(search.value)">
                             <i class="fa fa-search"></i>
                         </button>
                     </div>
                 </div>
                 <a class="btn btn-success btn-sm ml-3" href="/cart">
                   <i class="fa fa-shopping-cart"></i> Cart
-                  <span class="badge badge-light">3</span>
+                <span class="badge badge-light">{{cartProductSize}}</span>
               </a>
               <a class="btn btn-dark btn-sm ml-3" href="/logout"> Logout</a>
             </form>
@@ -47,34 +47,32 @@
 <div class="col">
 <div class="row">
 <div class="row card-deck">
-<div class="col-12 col-md-6 col-lg-4" *ngFor="let order of cartProducts">
+<div class="col-12 col-md-6 col-lg-4" *ngFor="let product of products">
     <div class="card">
         <img class="card-img-top" src="https://dummyimage.com/600x400/55595c/fff" alt="Card image cap">
         <div class="card-body">
-            <h4 class="card-title"><a href="product.html" title="View Product">{{order.product.name}}</a></h4>
-                <p *ngIf="order.product.genre" class="card-text" >Genre - {{order.product.genre}}</p>
-                <p *ngIf="order.product.author" class="card-text">Author - {{order.product.author}}</p>
-                <p *ngIf="order.product.publications" class="card-text">Publications - {{order.product.publications}}</p>
-                <p *ngIf="order.product.type" class="card-text" >Type - {{order.product.type}}</p>
-                <p *ngIf="order.product.brand" class="card-text">Brand - {{order.product.brand}}</p>
-                <p *ngIf="order.product.design" class="card-text">Design - {{order.product.design}}</p>
+            <h4 class="card-title"><a href="product.html" title="View Product">{{product.name}}</a></h4>
+                <p *ngIf="product.genre" class="card-text" >Genre - {{product.genre}}</p>
+                <p *ngIf="product.author" class="card-text">Author - {{product.author}}</p>
+                <p *ngIf="product.publications" class="card-text">Publications - {{product.publications}}</p>
+                <p *ngIf="product.type" class="card-text" >Type - {{product.type}}</p>
+                <p *ngIf="product.brand" class="card-text">Brand - {{product.brand}}</p>
+                <p *ngIf="product.design" class="card-text">Design - {{product.design}}</p>
             <div class="row">
                 <div class="col">
-                    <p class="btn btn-primary btn-block">Rs.{{order.product.price}}</p>
+                    <p class="btn btn-primary btn-block">Rs.{{product.price}}</p>
                 </div>
-                <div class="col-4 padding-0" *ngIf="!isProductSelected(order.product)">
+                <!-- <div class="col-4 padding-0" *ngIf="!isProductSelected(order.product)">
                     <input type="number" min="0" class="form-control" [(ngModel)]=order.quantity>
+                </div> -->
+                <div class="col">
+                    <button class="btn btn-success btn-block" (click)="addToCart(product)">Add To Cart</button>
                 </div>
-                <div class="col" *ngIf="!isProductSelected(order.product)">
-                    <button class="btn btn-success btn-block" (click)="addToCart(order)"
-                            [disabled]="order.quantity <= 0">Add To Cart
-                    </button>
-                </div>
-                <div class="col"*ngIf="isProductSelected(order.product)">
+                <!-- <div class="col"*ngIf="isProductSelected(product)">
                     <button class="btn btn-primary btn-block"
-                            (click)="removeFromCart(order)">Remove From Cart
+                            (click)="removeFromCart(product)">Remove From Cart
                     </button>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>

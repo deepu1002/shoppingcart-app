@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, OnDestroy, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CartProducts } from '../model/cart-products.model';
 import { ShoppingService } from '../service/ShoppingService';
 import { CartProduct } from '../model/cart-product.model';
@@ -9,68 +9,37 @@ import { Subscription } from 'rxjs';
   templateUrl: './shopping-cart.component.html',
   styleUrls: ['./shopping-cart.component.css']
 })
-export class ShoppingCartComponent implements OnInit, OnDestroy {
-  orderFinished: boolean;
-  orders: CartProducts;
+export class ShoppingCartComponent implements OnInit {
+  cartProducts: CartProduct[] = [];
   total: number;
   sub: Subscription;
 
-  onOrderFinished: EventEmitter<boolean>;
-
   constructor(private shoppingService: ShoppingService) {
-      this.total = 0;
-      this.orderFinished = false;
-      this.onOrderFinished = new EventEmitter<boolean>();
+
   }
 
-  private calculateTotal(products: CartProduct[]): number {
-    let sum = 0;
-    products.forEach(value => {
-        sum += (value.product.price * value.quantity);
-    });
-    return sum;
-}
-
-  ngOnInit() {
-      this.orders = new CartProducts();
-      this.loadCart();
-      this.loadTotal();
-  }
-
-  loadTotal() {
-      this.sub = this.shoppingService.OrdersChanged.subscribe(() => {
-          this.total = this.calculateTotal(this.orders.cartProducts);
-      });
-  }
-
-  loadCart() {
-      this.sub = this.shoppingService.ProductOrderChanged.subscribe(() => {
-          let cartProduct = this.shoppingService.SelectedCartProduct;
-          if (cartProduct) {
-              this.orders.cartProducts.push(new CartProduct(
-                cartProduct.product, cartProduct.quantity));
-          }
-          this.shoppingService.CartProducts = this.orders;
-          this.orders = this.shoppingService.CartProducts;
-          this.total = this.calculateTotal(this.orders.cartProducts);
-      });
-  }
-
-  ngOnDestroy() {
-      this.sub.unsubscribe();
-  }
-
-  finishOrder() {
-    this.orderFinished = true;
-    this.shoppingService.Total = this.total;
-    this.onOrderFinished.emit(this.orderFinished);
-}
-
-reset() {
-    this.orderFinished = false;
-    this.orders = new CartProducts();
-    this.orders.cartProducts = []
-    this.loadTotal();
+   ngOnInit() {
     this.total = 0;
+    this.cartProducts = [];
+    this.getAllCartItems();
+    this.calculateTotal();
+   }
+
+   getAllCartItems() {
+    this.shoppingService.getAllCartItems('john').subscribe(
+      (cartProducts: any[]) => {
+        this.cartProducts = [];
+        this.cartProducts = cartProducts;
+    },
+    (error) => console.log(error)
+);
 }
+
+   private calculateTotal() {
+      let sum  = 0;
+      this.cartProducts.forEach(value => {
+        sum += (value.price * value.quantity);
+      });
+      this.total = sum;
+  }
 }

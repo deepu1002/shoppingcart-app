@@ -14,84 +14,68 @@ export class ProductsComponent implements OnInit {
 
     cartProducts: CartProduct[] = [];
     products: Product[] = [];
-    selectedCartProduct: CartProduct;
-    private shoppingCartProducts: CartProducts;
-    sub: Subscription;
-    productSelected = false;
+    cartProductSize: number;
 
     constructor(private shoppingService: ShoppingService) {}
 
     ngOnInit() {
+        this.cartProductSize = 0;
         this.cartProducts = [];
+        this.products = [];
         this.loadProducts();
-        this.loadOrders();
+        this.getAllCartItems();
     }
 
-    addToCart(cartProduct: CartProduct) {
-      this.shoppingService.SelectedCartProduct = cartProduct;
-      this.selectedCartProduct = this.shoppingService.SelectedCartProduct;
-      this.productSelected = true;
+  addToCart(product: Product) {
+    this.shoppingService.addToCart(new CartProduct(product.id, product.name, product.price, 1, 'john'))
+          .subscribe(() => {
+           this.getAllCartItems();
+        },
+        (error) => console.log(error)
+    );
   }
 
-  removeFromCart(cartProduct: CartProduct) {
-      let index = this.getProductIndex(cartProduct.product);
-      if (index > -1) {
-          this.shoppingCartProducts.cartProducts.splice(
-              this.getProductIndex(cartProduct.product), 1);
-      }
-      this.shoppingService.CartProducts = this.shoppingCartProducts;
-      this.shoppingCartProducts = this.shoppingService.CartProducts;
-      this.productSelected = false;
-  }
-
-  getProductIndex(product: Product): number {
-    return this.shoppingService.CartProducts.cartProducts.findIndex(
-        value => value.product === product);
-  }
-
-  isProductSelected(product: Product): boolean {
-      return this.getProductIndex(product) > -1;
+  getAllCartItems() {
+      this.shoppingService.getAllCartItems('john').subscribe(
+        (cartProducts: any[]) => {
+          this.cartProducts = [];
+          this.cartProducts = cartProducts;
+          this.cartProductSize = this.cartProducts.length;
+      },
+      (error) => console.log(error)
+  );
   }
 
     loadProducts() {
         this.shoppingService.getAllProducts()
             .subscribe(
                 (products: any[]) => {
+                    this.products = [];
                     this.products = products;
-                    this.products.forEach(product => {
-                        this.cartProducts.push(new CartProduct(product, 0));
-                    });
                 },
                 (error) => console.log(error)
             );
+    }
+
+    searchProducts(value: string) {
+      this.shoppingService.getSearchProducts(value)
+          .subscribe(
+              (products: any[]) => {
+                  this.products = [];
+                  this.products = products;
+              },
+              (error) => console.log(error)
+          );
     }
 
     loadProductCategory(value: string) {
       this.shoppingService.getAllProductCategory(value)
           .subscribe(
               (products: any[]) => {
-                  this.cartProducts = [];
+                  this.products = [];
                   this.products = products;
-                  this.products.forEach(product => {
-                      this.cartProducts.push(new CartProduct(product, 0));
-                  });
               },
               (error) => console.log(error)
           );
   }
-
-    loadOrders() {
-        this.sub = this.shoppingService.OrdersChanged.subscribe(() => {
-            this.shoppingCartProducts = this.shoppingService.CartProducts;
-        });
-    }
-
-    reset() {
-      this.cartProducts = [];
-      this.loadProducts();
-      this.shoppingService.CartProducts.cartProducts = [];
-      this.loadOrders();
-      this.productSelected = false;
-  }
-
 }

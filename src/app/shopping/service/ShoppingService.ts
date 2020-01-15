@@ -1,4 +1,4 @@
-import {CartProduct} from '../model/cart-product.model';
+import { CartProduct } from '../model/cart-product.model';
 import {Subject} from 'rxjs/internal/Subject';
 import {CartProducts} from '../model/cart-products.model';
 import {HttpClient} from '@angular/common/http';
@@ -7,8 +7,9 @@ import {Injectable} from '@angular/core';
 @Injectable()
 export class ShoppingService {
     private productsUrl = 'api/products/';
-    private cartUrl = 'api/cart';
+    private cartUrl = 'api/cart/';
     private categoryUrl = 'api/products/category/';
+    private searchUrl = 'api/products/name/';
 
     private cartProduct: CartProduct;
     private cart: CartProducts = new CartProducts();
@@ -30,38 +31,32 @@ export class ShoppingService {
         return this.http.get(this.productsUrl);
     }
 
+    getAllCartItems(userName: string) {
+      return this.http.get(this.cartUrl + 'name/' + userName);
+  }
+
     getAllProductCategory(value: string) {
       return this.http.get(this.categoryUrl + value);
   }
+
+    getSearchProducts(value: string) {
+      return this.http.get(this.searchUrl + value);
+    }
 
     saveOrder(cart: CartProducts) {
         return this.http.post(this.cartUrl, cart);
     }
 
-    set SelectedCartProduct(value: CartProduct) {
-        this.cartProduct = value;
-        this.cartProductSubject.next();
+    addToCart(cartProduct: CartProduct) {
+      return this.http.post(this.cartUrl, cartProduct);
     }
 
-    get SelectedCartProduct() {
-        return this.cartProduct;
-    }
+    // get Total() {
+    //     return this.total;
+    // }
 
-    set CartProducts(value: CartProducts) {
-        this.cart = value;
-        this.cartSubject.next();
-    }
-
-    get CartProducts() {
-        return this.cart;
-    }
-
-    get Total() {
-        return this.total;
-    }
-
-    set Total(value: number) {
-        this.total = value;
-        this.totalSubject.next();
-    }
+    // set Total(value: number) {
+    //     this.total = value;
+    //     this.totalSubject.next();
+    // }
 }

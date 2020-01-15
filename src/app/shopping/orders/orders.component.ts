@@ -15,25 +15,25 @@ export class OrdersComponent implements OnInit {
   sub: Subscription;
 
   constructor(private shoppingService: ShoppingService) {
-      this.orders = this.shoppingService.CartProducts;
+      //this.orders = this.shoppingService.CartProducts;
   }
 
   ngOnInit() {
-      this.paid = false;
-      this.sub = this.shoppingService.OrdersChanged.subscribe(() => {
-          this.orders = this.shoppingService.CartProducts;
-      });
-      this.loadTotal();
+      // this.paid = false;
+      // this.sub = this.shoppingService.OrdersChanged.subscribe(() => {
+      //     this.orders = this.shoppingService.CartProducts;
+      // });
+      // this.loadTotal();
   }
 
-  pay() {
-      this.paid = true;
-      this.shoppingService.saveOrder(this.orders).subscribe();
-  }
+  // pay() {
+  //     this.paid = true;
+  //     this.shoppingService.saveOrder(this.orders).subscribe();
+  // }
 
-  loadTotal() {
-    this.sub = this.shoppingService.TotalChanged.subscribe(() => {
-        this.total = this.shoppingService.Total;
-    });
-}
+  // loadTotal() {
+  //   this.sub = this.shoppingService.TotalChanged.subscribe(() => {
+  //       this.total = this.shoppingService.Total;
+  //   });
+//}
 }
