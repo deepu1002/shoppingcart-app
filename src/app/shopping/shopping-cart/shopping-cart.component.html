@@ -1,4 +1,4 @@
-<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
@@ -13,30 +13,65 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
 
             <form class="form-inline my-2 my-lg-0">
-                <a class="btn btn-success btn-sm ml-3" href="/home">Shopping
+                <a class="btn btn-success btn-sm ml-3" href="/home">Home
               </a>
-              <a class="btn btn-dark btn-sm ml-3" href="/logout"> Logout</a>
+              <a class="btn btn-primary btn-sm ml-3" href="/logout"> Logout</a>
             </form>
         </div>
     </div>
 </nav>
 <div>
-</div> -->
+</div>
 
-<div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
-  <div class="card-header text-center">Shopping Cart</div>
-  <div class="card-body">
-      <h5 class="card-title">Total: Rs. {{total}}</h5>
-      <hr>
-      <h6 class="card-title">Items bought:</h6>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
 
-      <ul>
-          <li *ngFor="let cartProduct of cartProducts">
-              {{ cartProduct.name }} - {{ cartProduct.quantity}} pcs. - Rs. {{ cartProduct.price}}
-          </li>
-      </ul>
-
-      <button class="btn btn-light btn-block" (click)="finishOrder()"
-           [disabled]="cartProducts.length == 0">Checkout</button>
-  </div>
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container">
+	<table id="cart" class="table table-hover table-condensed">
+    				<thead>
+						<tr>
+							<th style="width:50%">Product</th>
+							<th style="width:10%">Price</th>
+							<th style="width:8%">Quantity</th>
+							<th style="width:22%" class="text-center">Subtotal</th>
+							<th style="width:10%"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let cartProduct of cartProducts">
+							<td data-th="Product" >
+								<div class="row" >
+									<div class="col-sm-2 hidden-xs"><img src="http://placehold.it/100x100" alt="..." class="img-responsive"/></div>
+									<div class="col-sm-10">
+										<h4 class="nomargin">{{ cartProduct.name }}</h4>
+										<p>                                                                                </p>
+									</div>
+								</div>
+							</td>
+            <td data-th="Price">Rs. {{ cartProduct.price}}</td>
+							<td data-th="Quantity">
+								<input type="number" class="form-control text-center" placeholder="Quantity" [(ngModel)]="cartProduct.quantity">
+							</td>
+							<td data-th="Subtotal" class="text-center">Rs. {{ cartProduct.price * cartProduct.quantity}}.00</td>
+							<td class="actions" data-th="">
+							  <button class="btn btn-info btn-sm" (click)="updateCartProduct(cartProduct)"><i class="fa fa-refresh"></i></button>
+								<button class="btn btn-danger btn-sm" (click)="deleteProduct(cartProduct.id)"><i class="fa fa-trash-o"></i></button>
+							</td>
+						</tr >
+					</tbody>
+					<tfoot>
+						<tr class="visible-xs">
+							<td class="text-center"><strong>Total: Rs. {{total}}</strong></td>
+						</tr>
+						<tr>
+							<td><a href="/home" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
+							<td colspan="2" class="hidden-xs"></td>
+							<td class="hidden-xs text-center"><strong>Total: Rs. {{total}}</strong></td>
+							<td><a href="/home" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
+						</tr>
+					</tfoot>
+				</table>
 </div>

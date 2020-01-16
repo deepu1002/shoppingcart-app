@@ -22,24 +22,46 @@ export class ShoppingCartComponent implements OnInit {
     this.total = 0;
     this.cartProducts = [];
     this.getAllCartItems();
-    this.calculateTotal();
+    this.total = this.calculateTotal();
    }
 
    getAllCartItems() {
-    this.shoppingService.getAllCartItems('john').subscribe(
-      (cartProducts: any[]) => {
-        this.cartProducts = [];
-        this.cartProducts = cartProducts;
-    },
-    (error) => console.log(error)
-);
+      console.log(sessionStorage.getItem('username'));
+      this.shoppingService.getAllCartItems(sessionStorage.getItem('username')).subscribe(
+        (cartProducts: any[]) => {
+          this.cartProducts = [];
+          this.cartProducts = cartProducts;
+          this.total = this.calculateTotal();
+      },
+      (error) => console.log(error)
+  );
+  }
+
+  updateCartProduct(cartProduct: CartProduct) {
+      console.log(cartProduct.id);
+      this.shoppingService.updateCartProduct(cartProduct).subscribe(
+        (cartProducts: any[]) => {
+          this.getAllCartItems();
+      },
+      (error) => console.log(error)
+  );
 }
 
-   private calculateTotal() {
+  deleteProduct(id) {
+    if (window.confirm('Are you sure, you want to delete?')) {
+      this.shoppingService.deleteCartProduct(id).subscribe(data => {
+        this.getAllCartItems();
+      });
+    }
+  }
+
+
+   calculateTotal() {
       let sum  = 0;
       this.cartProducts.forEach(value => {
         sum += (value.price * value.quantity);
       });
-      this.total = sum;
+      return sum;
   }
+
 }

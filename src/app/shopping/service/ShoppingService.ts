@@ -1,7 +1,7 @@
 import { CartProduct } from '../model/cart-product.model';
 import {Subject} from 'rxjs/internal/Subject';
-import {CartProducts} from '../model/cart-products.model';
-import {HttpClient} from '@angular/common/http';
+import { CartProducts } from '../model/cart-products.model';
+import {HttpClient, HttpHeaders } from '@angular/common/http';
 import {Injectable} from '@angular/core';
 
 @Injectable()
@@ -27,6 +27,13 @@ export class ShoppingService {
     constructor(private http: HttpClient) {
     }
 
+    httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    }
+
+
     getAllProducts() {
         return this.http.get(this.productsUrl);
     }
@@ -51,12 +58,12 @@ export class ShoppingService {
       return this.http.post(this.cartUrl, cartProduct);
     }
 
-    // get Total() {
-    //     return this.total;
-    // }
+    updateCartProduct(cartProduct: CartProduct) {
+      return this.http.put(this.cartUrl, cartProduct);
+    }
 
-    // set Total(value: number) {
-    //     this.total = value;
-    //     this.totalSubject.next();
-    // }
-}
+    deleteCartProduct(id) {
+      return this.http.delete(this.cartUrl + id, this.httpOptions);
+    }
+
+  }

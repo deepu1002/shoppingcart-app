@@ -1,19 +1,17 @@
 import { Injectable } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import { User } from '../model/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
+  private userUrl = 'api/user/validate';
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  authenticate(username, password) {
-    if (username === 'john' && password === 'john@mindtree.com') {
-      sessionStorage.setItem('username', username);
-      return true;
-    } else {
-      return false;
-    }
+  validateUser(user: User) {
+      return this.http.post(this.userUrl, user);
   }
 
   isUserLoggedIn() {

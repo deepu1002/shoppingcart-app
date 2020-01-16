@@ -15,6 +15,7 @@ export class ProductsComponent implements OnInit {
     cartProducts: CartProduct[] = [];
     products: Product[] = [];
     cartProductSize: number;
+    searchText;
 
     constructor(private shoppingService: ShoppingService) {}
 
@@ -27,7 +28,7 @@ export class ProductsComponent implements OnInit {
     }
 
   addToCart(product: Product) {
-    this.shoppingService.addToCart(new CartProduct(product.id, product.name, product.price, 1, 'john'))
+    this.shoppingService.addToCart(new CartProduct(product.id, product.name, product.price, 1, sessionStorage.getItem('username')))
           .subscribe(() => {
            this.getAllCartItems();
         },
@@ -36,7 +37,7 @@ export class ProductsComponent implements OnInit {
   }
 
   getAllCartItems() {
-      this.shoppingService.getAllCartItems('john').subscribe(
+      this.shoppingService.getAllCartItems(sessionStorage.getItem('username')).subscribe(
         (cartProducts: any[]) => {
           this.cartProducts = [];
           this.cartProducts = cartProducts;
