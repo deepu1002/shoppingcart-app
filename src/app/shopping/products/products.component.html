@@ -1,82 +1,118 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link
+  href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+  rel="stylesheet"
+  id="bootstrap-css"
+/>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<link
+  href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+  rel="stylesheet"
+  integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+  crossorigin="anonymous"
+/>
 
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-    <div class="container">
-        <a class="navbar-brand" href="index.html">Shopping App</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+  <div class="container">
+    <a class="navbar-brand" href="index.html">Shopping App</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarsExampleDefault"
+      aria-controls="navbarsExampleDefault"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-        <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
-
-            <form class="form-inline my-2 my-lg-0">
-                <div class="input-group input-group-sm">
-                    <input type="text" #search class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search by name...">
-                    <div class="input-group-append">
-                        <button type="button" class="btn btn-secondary btn-number" (click)="searchProducts(search.value)">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-                <a class="btn btn-success btn-sm ml-3" href="/cart">
-                  <i class="fa fa-shopping-cart"></i> Cart
-                <span class="badge badge-light">{{cartProducts.length}}</span>
-              </a>
-              <a class="btn btn-dark btn-sm ml-3" href="/logout"> Logout</a>
-            </form>
+    <div
+      class="collapse navbar-collapse justify-content-end"
+      id="navbarsExampleDefault"
+    >
+      <form class="form-inline my-2 my-lg-0">
+        <div class="input-group input-group-sm">
+          <input
+            class="form-control"
+            type="text"
+            name="search"
+            [(ngModel)]="searchText"
+            autocomplete="off"
+            placeholder="Search by id or name or category"
+          />
         </div>
+        <a class="btn btn-success btn-sm ml-3" href="/cart">
+          <i class="fa fa-shopping-cart"></i> Cart
+          <span class="badge badge-light">{{ cartProducts.length }}</span>
+        </a>
+        <a class="btn btn-dark btn-sm ml-3" href="/logout"> Logout</a>
+      </form>
     </div>
+  </div>
 </nav>
-<div>
-</div>
+<div></div>
 <div class="container">
-    <div class="row">
-        <!-- <div class="col-12 col-sm-3">
-            <div class="card bg-dark mb-3">
-                <div class="card-header bg-dark text-white text-uppercase"><i class="fa fa-list"></i> Categories</div>
-                <ul class="list-group category_block">
-                    <li class="list-group-item"><button class="btn btn-success btn-block" (click)="loadProductCategory('Book')">Books></button></li>
-                    <li class="list-group-item"><button class="btn btn-success btn-block" (click)="loadProductCategory('Apparal')">Apparels></button></li>
-                </ul>
-            </div>
-        </div> -->
-
-<div class="col">
-<div class="row">
-<div class="row card-deck">
-<div class="col-12 col-md-6 col-lg-4" *ngFor="let product of products">
-    <div class="card">
-        <img class="card-img-top" src="https://dummyimage.com/600x400/55595c/fff" alt="Card image cap">
-        <div class="card-body">
-            <h4 class="card-title"><a href="product.html" title="View Product">{{product.name}}</a></h4>
-                <p *ngIf="product.genre" class="card-text" >Genre - {{product.genre}}</p>
-                <p *ngIf="product.author" class="card-text">Author - {{product.author}}</p>
-                <p *ngIf="product.publications" class="card-text">Publications - {{product.publications}}</p>
-                <p *ngIf="product.type" class="card-text" >Type - {{product.type}}</p>
-                <p *ngIf="product.brand" class="card-text">Brand - {{product.brand}}</p>
-                <p *ngIf="product.design" class="card-text">Design - {{product.design}}</p>
-            <div class="row">
-                <div class="col">
-                    <p class="btn btn-primary btn-block">Rs.{{product.price}}</p>
-                </div>
-                <!-- <div class="col-4 padding-0" *ngIf="!isProductSelected(order.product)">
-                    <input type="number" min="0" class="form-control" [(ngModel)]=order.quantity>
-                </div> -->
-                <div class="col">
-                    <button class="btn btn-success btn-block" (click)="addToCart(product)">Add To Cart</button>
-                </div>
-                <!-- <div class="col"*ngIf="isProductSelected(product)">
-                    <button class="btn btn-primary btn-block"
-                            (click)="removeFromCart(product)">Remove From Cart
+  <div class="row">
+    <div class="col">
+      <div class="row">
+        <div class="row card-deck">
+          <div
+            class="col-12 col-md-6 col-lg-4"
+            *ngFor="let product of products | filter: searchText"
+          >
+            <br />
+            <br />
+            <div class="card">
+              <img
+                class="card-img-top"
+                src="https://dummyimage.com/600x400/55595c/fff"
+                alt="Card image cap"
+              />
+              <div class="card-body">
+                <h4 class="card-title">
+                  <a href="product.html" title="View Product">{{
+                    product.name
+                  }}</a>
+                </h4>
+                <p *ngIf="product.genre" class="card-text">
+                  Genre - {{ product.genre }}
+                </p>
+                <p *ngIf="product.author" class="card-text">
+                  Author - {{ product.author }}
+                </p>
+                <p *ngIf="product.publications" class="card-text">
+                  Publications - {{ product.publications }}
+                </p>
+                <p *ngIf="product.type" class="card-text">
+                  Type - {{ product.type }}
+                </p>
+                <p *ngIf="product.brand" class="card-text">
+                  Brand - {{ product.brand }}
+                </p>
+                <p *ngIf="product.design" class="card-text">
+                  Design - {{ product.design }}
+                </p>
+                <div class="row">
+                  <div class="col">
+                    <p class="btn btn-primary btn-block">
+                      Rs.{{ product.price }}
+                    </p>
+                  </div>
+                  <div class="col">
+                    <button
+                      class="btn btn-success btn-block"
+                      (click)="addToCart(product)"
+                    >
+                      Add To Cart
                     </button>
-                </div> -->
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-</div>
-</div>
+  </div>
 </div>

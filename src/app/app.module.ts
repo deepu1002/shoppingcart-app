@@ -11,6 +11,7 @@ import { ShoppingService } from './shopping/service/ShoppingService';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './shopping/login/login.component';
 import { LogoutComponent } from './shopping/logout/logout.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { LogoutComponent } from './shopping/logout/logout.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    Ng2SearchPipeModule
   ],
   providers: [ShoppingService],
   bootstrap: [AppComponent]
